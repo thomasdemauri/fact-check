@@ -1,0 +1,39 @@
+<div class="w-full rounded-lg bg-white shadow-md p-5 border border-gray-200">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-3">
+        <span class="text-lg font-semibold text-gray-800">
+            {{ getIdentification() }}
+        </span>
+
+        <span class="text-sm text-gray-500">
+            {{ proposition()?.dataApresentacao | date:'dd/MM/yyyy' }}
+        </span>
+    </div>
+
+    <!-- Content -->
+    <div class="mb-5">
+        <p class="text-sm leading-6 text-gray-600">
+            {{ proposition()?.ementa }}
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+
+        <span class="text-xs font-medium uppercase tracking-wide text-gray-500">
+            {{ getPropositionType(proposition()?.codTipo )?.nome }}
+        </span>
+
+        <button
+            type="button"
+            class="rounded-md px-4 py-2 text-sm font-medium
+                   text-blue-600 hover:bg-blue-50
+                   focus:outline-none focus:ring-2 focus:ring-blue-500"
+            (click)="navigateToDetails()"
+        >
+            Ver proposição
+        </button>
+    </div>
+
+</div>

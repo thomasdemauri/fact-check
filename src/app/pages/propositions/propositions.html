@@ -1,0 +1,5 @@
+<div class="min-h-[80vh] overflow-y-scroll">
+  @for (proposition of response().dados; track proposition.id) {
+    <app-card [proposition]="proposition" />
+  }
+</div>

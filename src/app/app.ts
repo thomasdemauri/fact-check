@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {Toolbar, ToolbarWidget} from '@angular/aria/toolbar';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Toolbar, ToolbarWidget],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
