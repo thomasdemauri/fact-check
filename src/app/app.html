@@ -11,6 +11,7 @@
         ngToolbarWidget
         value="proposicoes"
         type="button"
+        (click)="goToPropositions()"
         aria-label="Proposições"
         class="text-blue-700 hover:text-blue-900 cursor-pointer"
       >
@@ -21,6 +22,7 @@
         ngToolbarWidget
         value="deputados"
         type="button"
+        (click)="showDeputySearch.set(true)"
         aria-label="Deputados"
         class="text-blue-700 hover:text-blue-900 cursor-pointer"
       >
@@ -28,6 +30,25 @@
       </button>
     </div>
   </div>
+
+  @if (showDeputySearch()) {
+    <div class="flex gap-3 p-4">
+      <input
+        #deputyId
+        type="number"
+        placeholder="ID do deputado"
+        class="rounded-md border border-gray-300 px-3 py-2 text-sm"
+        (keyup.enter)="searchDeputy(deputyId.value)"
+      />
+      <button
+        type="button"
+        class="rounded-md px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 cursor-pointer"
+        (click)="searchDeputy(deputyId.value)"
+      >
+        Buscar
+      </button>
+    </div>
+  }
 	<section>
 		<router-outlet />
 	</section>
