@@ -11,4 +11,8 @@ export class EndpointsAPI {
     getPropositionAuthors = (id: number) => {
         return `https://dadosabertos.camara.leg.br/api/v2/proposicoes/${id}/autores`;
     }
+
+    getDeputyById = (id: number) => {
+        return `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}`;
+    }
 }

@@ -1,0 +1,36 @@
+<div class="w-full rounded-lg bg-white shadow-md p-5 border border-gray-200">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-3">
+        <span class="text-lg font-semibold text-gray-800">
+            {{ response()?.dados?.ultimoStatus?.nomeEleitoral }}
+        </span>
+
+        <span class="text-sm text-gray-500">
+            {{ response()?.dados?.ultimoStatus?.siglaPartido }} - {{ response()?.dados?.ultimoStatus?.siglaUf }}
+        </span>
+    </div>
+
+    <!-- Content -->
+    <div class="flex gap-4 mb-5">
+        <img
+            class="h-28 w-24 rounded-md object-cover border border-gray-200"
+            [src]="response()?.dados?.ultimoStatus?.urlFoto"
+            [alt]="response()?.dados?.ultimoStatus?.nomeEleitoral"
+        />
+
+        <div class="text-sm leading-6 text-gray-600">
+            <p>{{ response()?.dados?.nomeCivil }}</p>
+            <p>Nascimento: {{ response()?.dados?.dataNascimento | date:'dd/MM/yyyy' }}</p>
+            <p>Escolaridade: {{ response()?.dados?.escolaridade }}</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+        <span class="text-xs font-medium uppercase tracking-wide text-gray-500">
+            {{ response()?.dados?.ultimoStatus?.situacao }}
+        </span>
+    </div>
+
+</div>

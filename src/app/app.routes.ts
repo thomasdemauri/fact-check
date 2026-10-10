@@ -3,6 +3,8 @@ import { Propositions } from './pages/propositions/propositions';
 import { propositionResolver } from './resolvers/proposition-resolver';
 import { PropositionDetailed } from './pages/proposition-detailed/proposition-detailed';
 import { propositionDetailedResolver } from './resolvers/proposition-detailed-resolver';
+import { DeputyDetailed } from './pages/deputy-detailed/deputy-detailed';
+import { deputyResolver } from './resolvers/deputy-resolver';
 
 export const routes: Routes = [
     {
@@ -17,6 +19,13 @@ export const routes: Routes = [
         component: PropositionDetailed,
         resolve: {
             proposition: propositionDetailedResolver
+        }
+    },
+    {
+        path: 'deputies/:id',
+        component: DeputyDetailed,
+        resolve: {
+            deputy: deputyResolver
         }
     }
 ];
