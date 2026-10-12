@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Propositions } from './pages/propositions/propositions';
-import { propositionResolver } from './resolvers/proposition-resolver';
 import { PropositionDetailed } from './pages/proposition-detailed/proposition-detailed';
 import { propositionDetailedResolver } from './resolvers/proposition-detailed-resolver';
 import { DeputyDetailed } from './pages/deputy-detailed/deputy-detailed';
@@ -8,11 +7,8 @@ import { deputyResolver } from './resolvers/deputy-resolver';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'propositions',
         component: Propositions,
-        resolve: {
-            propositions: propositionResolver
-        },
     },
     {
         path: 'propositions/:id',

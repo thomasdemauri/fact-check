@@ -48,6 +48,39 @@ export interface IPropositionsResponse<T = IProposition[]> {
 }
 
 export interface ILink {
-    rel: string;
+    rel: LinkTypes;
     href: string;
+}
+
+export enum LinkTypes {
+    Self = 'self',
+    Next = 'next',
+    First = 'first',
+    Last = 'last',
+    Previous = 'previous'
+}
+
+export interface IPropositionFilter {
+    id?: number[];
+    siglaTipo?: string[];
+    numero?: number[];
+    ano?: number[];
+    codTipo?: number[];
+    idDeputadoAutor?: number[];
+    autor?: string[];
+    siglaPartidoAutor?: string[];
+    idPartidoAutor?: number[];
+    siglaUfAutor?: string[];
+    keywords?: string[];
+    tramitacaoSenado?: boolean;
+    dataInicio?: Date;
+    dataFim?: Date;
+    dataApresentacaoInicio?: Date;
+    dataApresentacaoFim?: Date;
+    codSituacao?: number[];
+    codTema?: number[];
+    pagina?: number;
+    itens: number;
+    ordem: 'ASC' | 'DESC';
+    ordenarPor: 'id'| 'codTipo' | 'siglaTipo' | 'numero' | 'ano';
 }
