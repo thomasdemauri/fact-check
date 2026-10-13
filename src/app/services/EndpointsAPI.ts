@@ -1,7 +1,7 @@
 export class EndpointsAPI {
     // Maybe in the future improve the url to accept parameters
     getPropositions = () => {
-        return 'https://dadosabertos.camara.leg.br/api/v2/proposicoes?codTipo=&itens=15&ordem=DESC&ordenarPor=ano';
+        return 'https://dadosabertos.camara.leg.br/api/v2/proposicoes';
     };
 
     getDetailedProposition = (id: number) => {
