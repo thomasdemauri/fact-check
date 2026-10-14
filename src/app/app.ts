@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import {Toolbar, ToolbarWidget} from '@angular/aria/toolbar';
 
@@ -8,11 +8,15 @@ import {Toolbar, ToolbarWidget} from '@angular/aria/toolbar';
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('fact-check');
   protected readonly showDeputySearch = signal(false);
 
   private router = inject(Router);
+
+  ngOnInit(): void {
+    this.goToPropositions();
+  }
 
   searchDeputy(id: string) {
     if (!id) return;
@@ -20,6 +24,6 @@ export class App {
   }
 
   goToPropositions() {
-    this.router.navigate(['']);
+    this.router.navigate(['propositions']);
   }
 }

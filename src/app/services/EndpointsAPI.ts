@@ -15,4 +15,8 @@ export class EndpointsAPI {
     getDeputyById = (id: number) => {
         return `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}`;
     }
+
+    getDeputies = () => {
+        return 'https://dadosabertos.camara.leg.br/api/v2/deputados';
+    }
 }

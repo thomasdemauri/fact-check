@@ -1,19 +1,47 @@
-<div class="flex h-[80vh] min-h-0 flex-col gap-4 p-4">
-  <div class="min-h-0 flex-1 space-y-4 overflow-y-auto">
-    @for (proposition of propositions(); track proposition.id) {
-      <app-card [proposition]="proposition" />
-    }
+<div class="flex flex-col h-[90vh] min-h-0 gap-4 p-4">
+
+  <div class="w-full rounded-lg bg-white px-4 pt-4 pb-2 shadow-md">
+    <form class="mx-auto flex w-full max-w-3xl justify-center">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Autor</mat-label>
+        <input type="text"
+              [value]="queryDeputyName()"
+              (input)="queryDeputyName.set($any($event.target).value)"
+              aria-label="Pesquise pelo autor da proposição"
+              matInput
+              [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete"
+        (optionSelected)="setFinalDeputyNameForTrigger($event)">
+          @for (option of deputiesData() ?? []; track option.id) {
+            <mat-option [value]="option.nome">{{option.nome}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
   </div>
 
-  <nav class="flex shrink-0 flex-wrap justify-center gap-2 border-t border-gray-200 bg-gray-50 py-3" aria-label="Paginação">
-    <button type="button" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(firstPage())">Primeira</button>
+  @if (response.isLoading()) {
+    <div class="h-[80vh] flex justify-center">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    }
+  
+  @if (response.value()) {
+    <div class="min-h-0 flex-1 flex flex-col gap-4 overflow-y-auto">
+      @for (proposition of propositions(); track proposition.id) {
+        <app-card [proposition]="proposition" />
+      }
+    </div>
+  } 
+  
+  <nav class="mt-auto flex shrink-0 flex-wrap justify-center gap-2 border-t border-gray-200 bg-gray-50 py-3" aria-label="Paginação">
+    <button type="button" class="cursor-pointer rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(firstPage())">Primeira</button>
     @if (previousPage() != null) {
-    <button type="button" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(previousPage())">Anterior</button>
+    <button type="button" class="cursor-pointer rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(previousPage())">Anterior</button>
     }
     @if (nextPage() != null) {
-    <button type="button" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(nextPage())">Próxima</button>
+    <button type="button" class="cursor-pointer rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(nextPage())">Próxima</button>
     }
-    <button type="button" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(lastPage())">Última</button>
+    <button type="button" class="cursor-pointer rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(lastPage())">Última</button>
   </nav>
-
 </div>
