@@ -1,3 +1,4 @@
+import { IBaseFilter } from './ICore';
 import { ILink } from './IProposition';
 
 export interface IDeputyOffice {
@@ -60,7 +61,7 @@ export interface IDeputyResponse<T = IDeputyDetailed[] | IDeputyList[]> {
     links: ILink[];
 }
 
-export interface IDeputiesFilter {
+export interface IDeputiesFilter extends IBaseFilter {
     id?: number;
     nome?: string;
     itens: number;

@@ -1,3 +1,5 @@
+import { IBaseFilter } from "./ICore";
+
 export interface IProposition {
     id: number;
     uri: string;
@@ -60,7 +62,7 @@ export enum LinkTypes {
     Previous = 'previous'
 }
 
-export interface IPropositionFilter {
+export interface IPropositionFilter extends IBaseFilter {
     id?: number[];
     siglaTipo?: string[];
     numero?: number[];
