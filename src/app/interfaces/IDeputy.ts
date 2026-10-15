@@ -27,7 +27,7 @@ export interface IDeputyStatus {
     descricaoStatus: string | null;
 }
 
-export interface IDeputy {
+export interface IDeputyDetailed {
     id: number;
     uri: string;
     nomeCivil: string;
@@ -43,7 +43,30 @@ export interface IDeputy {
     escolaridade: string;
 }
 
-export interface IDeputyResponse {
-    dados: IDeputy;
+export interface IDeputyList {
+    id: number;
+    uri: string;
+    nome: string;
+    siglaPartido: string;
+    uriPartido: string | null;
+    siglaUf: string;
+    idLegislatura: number;
+    urlFoto: string;
+    email: string | null;
+}
+
+export interface IDeputyResponse<T = IDeputyDetailed[] | IDeputyList[]> {
+    dados: T;
     links: ILink[];
+}
+
+export interface IDeputiesFilter {
+    id?: number;
+    nome?: string;
+    itens: number;
+    ordenarPor: 'id' | 'idLegislatura' | 'nome' | 'siglaUF' | 'siglaPartido';
+    /*
+        To do
+        - Add the remaining fields
+    */
 }
