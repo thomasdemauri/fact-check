@@ -1,0 +1,15 @@
+<mat-form-field class="w-full" appearance="fill">
+  <mat-label>Autor</mat-label>
+  <input type="text"
+        [value]="queryDeputyName()"
+        (input)="queryDeputyName.set($any($event.target).value)"
+        aria-label="Pesquise pelo autor da proposição"
+        matInput
+        [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete"
+  (optionSelected)="onDeputySelected($event)">
+    @for (option of deputiesData() ?? []; track option.id) {
+      <mat-option [value]="option.nome">{{option.nome}}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DeputyFilter } from '../../components/filters/deputy-filter/deputy-filter';
 
 @Component({
   imports: [
@@ -18,7 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    ReactiveFormsModule,],
+    ReactiveFormsModule,
+    DeputyFilter],
   selector: 'app-propositions',
   styleUrl: './propositions.css',
   templateUrl: './propositions.html',
@@ -32,29 +34,8 @@ export class Propositions {
     ordem: 'DESC',
     ordenarPor: 'ano',
   });
-
-  protected deputiesFilter = signal<IDeputiesFilter>({
-    itens: 10,
-    ordenarPor: 'nome',
-    nome: ''
-  });
   
   finalDeputyNameTrigger = signal<string>('');
-  queryDeputyName = signal<string>('');
-  readonly debouncedQuery = debounced(
-    () => this.queryDeputyName(),
-    300
-  );
-
-  readonly deputiesResource = rxResource({
-  params: () => ({
-    ...this.deputiesFilter(),
-    nome: this.debouncedQuery.value() ?? '',
-  }),
-    stream: ({ params }) => this.service.getDeputies(params)
-  });
-
-  protected deputiesData = computed(() => this.deputiesResource.value()?.dados)
 
   readonly response = rxResource({
     params: () => ({
@@ -110,12 +91,12 @@ export class Propositions {
     this.filter.update(f => ({ ...f, pagina: page }));
   }
 
-  private setItens(items: number) {
+  protected setItens(items: number) {
     this.filter.update(f => ({ ...f, itens: items, pagina: 1 }));
   }
 
-  private setFinalDeputyNameForTrigger(event: MatAutocompleteSelectedEvent) {
-    this.finalDeputyNameTrigger.set(event.option.value);
+  protected deputySelected(deputyName: string) {
+    this.finalDeputyNameTrigger.set(deputyName);
   }
 
 }
