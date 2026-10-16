@@ -2,21 +2,7 @@
 
   <div class="w-full rounded-lg bg-white px-4 pt-4 pb-2 shadow-md">
     <form class="mx-auto flex w-full max-w-3xl justify-center">
-      <mat-form-field class="w-full" appearance="fill">
-        <mat-label>Autor</mat-label>
-        <input type="text"
-              [value]="queryDeputyName()"
-              (input)="queryDeputyName.set($any($event.target).value)"
-              aria-label="Pesquise pelo autor da proposição"
-              matInput
-              [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete"
-        (optionSelected)="setFinalDeputyNameForTrigger($event)">
-          @for (option of deputiesData() ?? []; track option.id) {
-            <mat-option [value]="option.nome">{{option.nome}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
+      <app-deputy-filter (deputySelected)="deputySelected($event)"></app-deputy-filter>
     </form>
   </div>
 
@@ -25,15 +11,15 @@
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
     }
-  
+
   @if (response.value()) {
     <div class="min-h-0 flex-1 flex flex-col gap-4 overflow-y-auto">
       @for (proposition of propositions(); track proposition.id) {
         <app-card [proposition]="proposition" />
       }
     </div>
-  } 
-  
+  }
+
   <nav class="mt-auto flex shrink-0 flex-wrap justify-center gap-2 border-t border-gray-200 bg-gray-50 py-3" aria-label="Paginação">
     <button type="button" class="cursor-pointer rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-50" (click)="goTo(firstPage())">Primeira</button>
     @if (previousPage() != null) {
